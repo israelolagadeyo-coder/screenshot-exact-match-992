@@ -14,6 +14,119 @@ export type Database = {
   }
   public: {
     Tables: {
+      datasets: {
+        Row: {
+          column_count: number
+          column_mapping: Json
+          created_at: string
+          created_by: string
+          error_message: string | null
+          file_path: string | null
+          file_size: number
+          health: Json
+          id: string
+          kind: Database["public"]["Enums"]["dataset_kind"]
+          mime_type: string | null
+          name: string
+          organization_id: string
+          original_filename: string
+          row_count: number
+          source_columns: Json
+          status: Database["public"]["Enums"]["dataset_status"]
+          updated_at: string
+        }
+        Insert: {
+          column_count?: number
+          column_mapping?: Json
+          created_at?: string
+          created_by?: string
+          error_message?: string | null
+          file_path?: string | null
+          file_size?: number
+          health?: Json
+          id?: string
+          kind: Database["public"]["Enums"]["dataset_kind"]
+          mime_type?: string | null
+          name: string
+          organization_id: string
+          original_filename: string
+          row_count?: number
+          source_columns?: Json
+          status?: Database["public"]["Enums"]["dataset_status"]
+          updated_at?: string
+        }
+        Update: {
+          column_count?: number
+          column_mapping?: Json
+          created_at?: string
+          created_by?: string
+          error_message?: string | null
+          file_path?: string | null
+          file_size?: number
+          health?: Json
+          id?: string
+          kind?: Database["public"]["Enums"]["dataset_kind"]
+          mime_type?: string | null
+          name?: string
+          organization_id?: string
+          original_filename?: string
+          row_count?: number
+          source_columns?: Json
+          status?: Database["public"]["Enums"]["dataset_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "datasets_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      dataset_rows: {
+        Row: {
+          created_at: string
+          data: Json
+          dataset_id: string
+          id: string
+          organization_id: string
+          row_index: number
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          dataset_id: string
+          id?: string
+          organization_id: string
+          row_index: number
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          dataset_id?: string
+          id?: string
+          organization_id?: string
+          row_index?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dataset_rows_dataset_id_fkey"
+            columns: ["dataset_id"]
+            isOneToOne: false
+            referencedRelation: "datasets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "dataset_rows_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organization_members: {
         Row: {
           created_at: string
@@ -125,6 +238,8 @@ export type Database = {
       }
     }
     Enums: {
+      dataset_kind: "sales" | "customers" | "expenses"
+      dataset_status: "uploaded" | "processing" | "processed" | "failed"
       org_role: "owner" | "admin" | "analyst" | "viewer"
     }
     CompositeTypes: {
