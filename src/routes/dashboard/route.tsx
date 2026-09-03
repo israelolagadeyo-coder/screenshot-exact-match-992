@@ -39,7 +39,7 @@ const NAV = [
   { to: "/dashboard/ai", label: "AI Analyst", icon: Bot },
   { to: "/dashboard/reports", label: "Reports", icon: FileText },
   { to: "/dashboard/settings", label: "Settings", icon: Settings },
-] as const;
+];
 
 const COMING_SOON = ["Automations", "Agents", "Integrations"];
 
@@ -49,7 +49,7 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav className="flex flex-1 flex-col gap-1 p-3" aria-label="Main">
       {NAV.map((item) => {
-        const active = item.exact ? pathname === item.to : pathname.startsWith(item.to);
+        const active = "exact" in item && item.exact ? pathname === item.to : pathname.startsWith(item.to);
         const Icon = item.icon;
         return (
           <Link
@@ -182,7 +182,7 @@ function DashboardLayout() {
                 </SheetContent>
               </Sheet>
 
-              <Select value={activeId ?? undefined} onValueChange={setActiveOrg}>
+              <Select value={activeId ?? ""} onValueChange={setActiveOrg}>
                 <SelectTrigger className="w-[200px]" aria-label="Active business">
                   <SelectValue />
                 </SelectTrigger>
