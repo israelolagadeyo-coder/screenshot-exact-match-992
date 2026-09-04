@@ -227,6 +227,66 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      analytics_coverage: { Args: { _org: string }; Returns: Json }
+      analytics_expense_categories: {
+        Args: { _from: string; _limit: number; _org: string; _to: string }
+        Returns: {
+          amount: number
+          entries: number
+          name: string
+        }[]
+      }
+      analytics_period: {
+        Args: { _from: string; _org: string; _to: string }
+        Returns: Json
+      }
+      analytics_rows: {
+        Args: { _org: string }
+        Returns: {
+          category: string
+          customer: string
+          dataset_id: string
+          dataset_type: string
+          expense: number
+          occurred_on: string
+          product: string
+          quantity: number
+          revenue: number
+        }[]
+      }
+      analytics_top_customers: {
+        Args: { _from: string; _limit: number; _org: string; _to: string }
+        Returns: {
+          name: string
+          revenue: number
+          transactions: number
+        }[]
+      }
+      analytics_top_products: {
+        Args: {
+          _ascending?: boolean
+          _from: string
+          _limit: number
+          _org: string
+          _to: string
+        }
+        Returns: {
+          name: string
+          revenue: number
+          transactions: number
+          units: number
+        }[]
+      }
+      analytics_trend: {
+        Args: { _from: string; _grain: string; _org: string; _to: string }
+        Returns: {
+          bucket: string
+          expenses: number
+          revenue: number
+          transactions: number
+          units: number
+        }[]
+      }
       has_org_role: {
         Args: {
           _org_id: string
@@ -239,6 +299,8 @@ export type Database = {
         Args: { _org_id: string; _user_id: string }
         Returns: boolean
       }
+      safe_day: { Args: { v: string }; Returns: string }
+      safe_num: { Args: { v: string }; Returns: number }
     }
     Enums: {
       org_role: "owner" | "admin" | "analyst" | "viewer"
