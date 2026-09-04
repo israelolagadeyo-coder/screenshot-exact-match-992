@@ -15,9 +15,11 @@
 - [ ] datasets / dataset_columns / transactions / customers / products tables
 - [ ] Dataset health panel
 
-## Phase 3 — analytics engine
-- [ ] Server-side aggregations: revenue, sales, products, customers, expenses
-- [ ] KPI cards on Overview, analytics charts, period comparison
+## Phase 3 — analytics engine (done)
+- [x] Server-side aggregations: revenue, sales, products, customers, expenses
+- [x] KPI cards on Overview, revenue trend chart, business health, data quality
+- [x] Analytics page: revenue, sales, products, customers, expenses + date ranges
+- [x] Tests for growth, date ranges and health scoring; docs/analytics.md
 
 ## Phase 4 — AI business analyst
 - [ ] Controlled analytics tools, chat, conversation history, evidence-based answers
