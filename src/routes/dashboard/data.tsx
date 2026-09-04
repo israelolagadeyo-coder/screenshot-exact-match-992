@@ -7,7 +7,8 @@ import { useOrg } from "@/lib/org-context";
 import { useAuth } from "@/lib/auth";
 import { useDatasets, type DatasetListItem } from "@/lib/datasets/queries";
 import { uploadAndProcessDataset, deleteDataset, type UploadProgress } from "@/lib/datasets/api";
-import { UploadZone, validateFile } from "@/components/datasets/UploadZone";
+import { UploadZone } from "@/components/datasets/UploadZone";
+import { validateFile } from "@/components/datasets/validateFile";
 import { DatasetList } from "@/components/datasets/DatasetList";
 import { DatasetDetailDialog } from "@/components/datasets/DatasetDetailDialog";
 import {
