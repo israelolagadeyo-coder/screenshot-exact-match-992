@@ -14,6 +14,122 @@ export type Database = {
   }
   public: {
     Tables: {
+      dataset_rows: {
+        Row: {
+          created_at: string
+          data: Json
+          dataset_id: string
+          id: string
+          organization_id: string
+          row_index: number
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          dataset_id: string
+          id?: string
+          organization_id: string
+          row_index?: number
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          dataset_id?: string
+          id?: string
+          organization_id?: string
+          row_index?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dataset_rows_dataset_id_fkey"
+            columns: ["dataset_id"]
+            isOneToOne: false
+            referencedRelation: "datasets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "dataset_rows_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      datasets: {
+        Row: {
+          cleaning: Json
+          column_count: number
+          column_mapping: Json
+          columns: Json
+          created_at: string
+          dataset_type: string
+          error_message: string | null
+          file_path: string
+          file_size: number
+          file_type: string
+          id: string
+          name: string
+          organization_id: string
+          preview: Json
+          row_count: number
+          status: string
+          updated_at: string
+          uploaded_by: string
+          validation: Json
+        }
+        Insert: {
+          cleaning?: Json
+          column_count?: number
+          column_mapping?: Json
+          columns?: Json
+          created_at?: string
+          dataset_type?: string
+          error_message?: string | null
+          file_path: string
+          file_size?: number
+          file_type?: string
+          id?: string
+          name: string
+          organization_id: string
+          preview?: Json
+          row_count?: number
+          status?: string
+          updated_at?: string
+          uploaded_by: string
+          validation?: Json
+        }
+        Update: {
+          cleaning?: Json
+          column_count?: number
+          column_mapping?: Json
+          columns?: Json
+          created_at?: string
+          dataset_type?: string
+          error_message?: string | null
+          file_path?: string
+          file_size?: number
+          file_type?: string
+          id?: string
+          name?: string
+          organization_id?: string
+          preview?: Json
+          row_count?: number
+          status?: string
+          updated_at?: string
+          uploaded_by?: string
+          validation?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "datasets_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organization_members: {
         Row: {
           created_at: string
