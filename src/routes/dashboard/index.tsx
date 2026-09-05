@@ -94,6 +94,11 @@ function OverviewPage() {
           </div>
 
           <div className="mt-6">
+            <BriefingCard orgId={a.orgId} period={a.rangeKey} />
+          </div>
+
+          <div className="mt-6">
+
             <ChartCard
               title="Revenue trend"
               question="How has revenue changed over time?"
