@@ -22,7 +22,7 @@ import {
   listConversations,
   listMessages,
 } from "@/lib/ai/analyst.functions";
-import { SUGGESTED_QUESTIONS, type AiMessage } from "@/lib/ai/types";
+import { SUGGESTED_QUESTIONS, type AiConversation, type AiMessage, type AskResult } from "@/lib/ai/types";
 
 export const Route = createFileRoute("/dashboard/ai")({
   component: AiPage,
@@ -56,19 +56,19 @@ function AiPage() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  const conversations = useQuery({
+  const conversations = useQuery<AiConversation[]>({
     queryKey: ["ai-conversations", orgId],
     queryFn: () => fetchConversations({ data: { organizationId: orgId } }),
   });
 
-  const messages = useQuery({
+  const messages = useQuery<AiMessage[]>({
     queryKey: ["ai-messages", activeId],
     enabled: Boolean(activeId),
     queryFn: () => fetchMessages({ data: { conversationId: activeId! } }),
   });
 
   const askMutation = useMutation({
-    mutationFn: (question: string) =>
+    mutationFn: (question: string): Promise<AskResult> =>
       ask({ data: { organizationId: orgId, conversationId: activeId, question } }),
     onSuccess: (result) => {
       setPending(null);

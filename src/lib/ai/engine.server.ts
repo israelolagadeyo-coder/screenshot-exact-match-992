@@ -847,7 +847,7 @@ export async function runAnalyst(params: {
       const toolStarted = Date.now();
       try {
         const outcome = await tool.run(params.ctx, args);
-        const record: AiToolCallRecord = { tool: name, arguments: args, summary: tool.describe(args) };
+        const record: AiToolCallRecord = { tool: name, arguments: args as Record<string, never>, summary: tool.describe(args) };
         toolCalls.push(record);
         for (const item of outcome.evidence) {
           if (!evidenceOut.some((e) => e.label === item.label && e.value === item.value)) evidenceOut.push(item);
