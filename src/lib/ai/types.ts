@@ -1,5 +1,7 @@
 /** Shared, browser-safe types for the AI Business Analyst (Phase 4). */
 
+export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
 export type Confidence = "known" | "inferred" | "unknown";
 
 export type AiEvidence = {
@@ -12,7 +14,7 @@ export type AiEvidence = {
 
 export type AiToolCallRecord = {
   tool: string;
-  arguments: Record<string, unknown>;
+  arguments: Record<string, JsonValue>;
   summary: string;
 };
 
