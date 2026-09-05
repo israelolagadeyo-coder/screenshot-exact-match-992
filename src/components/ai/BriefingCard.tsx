@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Link } from "@tanstack/react-router";
-import { Sparkline } from "lucide-react/dynamic.mjs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -73,5 +72,3 @@ export function BriefingCard({ orgId, period }: { orgId: string; period: string 
     </Card>
   );
 }
-
-export { Sparkline };
