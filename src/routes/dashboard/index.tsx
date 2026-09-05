@@ -12,6 +12,8 @@ import { trendQuery } from "@/lib/analytics/queries";
 import { buildDataQuality } from "@/lib/analytics/calc";
 import { describeRange } from "@/lib/analytics/dates";
 import { useDatasets } from "@/lib/datasets/queries";
+import { BriefingCard } from "@/components/ai/BriefingCard";
+
 
 export const Route = createFileRoute("/dashboard/")({
   component: OverviewPage,
