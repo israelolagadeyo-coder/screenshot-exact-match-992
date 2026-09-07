@@ -23,6 +23,7 @@ import { Route as DashboardDataRouteImport } from './routes/dashboard/data'
 import { Route as DashboardReportsRouteImport } from './routes/dashboard/reports'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard/settings'
 import { Route as DashboardReportsIndexRouteImport } from './routes/dashboard/reports/index'
+import { Route as DashboardReportsReportIdRouteImport } from './routes/dashboard/reports/$reportId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -94,6 +95,12 @@ const DashboardReportsIndexRoute = DashboardReportsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardReportsRoute,
 } as any)
+const DashboardReportsReportIdRoute =
+  DashboardReportsReportIdRouteImport.update({
+    id: '/$reportId',
+    path: '/$reportId',
+    getParentRoute: () => DashboardReportsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/reports': typeof DashboardReportsRouteWithChildren
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/reports/$reportId': typeof DashboardReportsReportIdRoute
   '/dashboard/reports/': typeof DashboardReportsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -123,6 +131,7 @@ export interface FileRoutesByTo {
   '/dashboard/data': typeof DashboardDataRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/reports/$reportId': typeof DashboardReportsReportIdRoute
   '/dashboard/reports': typeof DashboardReportsIndexRoute
 }
 export interface FileRoutesById {
@@ -140,6 +149,7 @@ export interface FileRoutesById {
   '/dashboard/reports': typeof DashboardReportsRouteWithChildren
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/reports/$reportId': typeof DashboardReportsReportIdRoute
   '/dashboard/reports/': typeof DashboardReportsIndexRoute
 }
 export interface FileRouteTypes {
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/dashboard/reports'
     | '/dashboard/settings'
     | '/dashboard/'
+    | '/dashboard/reports/$reportId'
     | '/dashboard/reports/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/dashboard/data'
     | '/dashboard/settings'
     | '/dashboard'
+    | '/dashboard/reports/$reportId'
     | '/dashboard/reports'
   id:
     | '__root__'
@@ -188,6 +200,7 @@ export interface FileRouteTypes {
     | '/dashboard/reports'
     | '/dashboard/settings'
     | '/dashboard/'
+    | '/dashboard/reports/$reportId'
     | '/dashboard/reports/'
   fileRoutesById: FileRoutesById
 }
@@ -301,14 +314,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardReportsIndexRouteImport
       parentRoute: typeof DashboardReportsRoute
     }
+    '/dashboard/reports/$reportId': {
+      id: '/dashboard/reports/$reportId'
+      path: '/$reportId'
+      fullPath: '/dashboard/reports/$reportId'
+      preLoaderRoute: typeof DashboardReportsReportIdRouteImport
+      parentRoute: typeof DashboardReportsRoute
+    }
   }
 }
 
 interface DashboardReportsRouteChildren {
+  DashboardReportsReportIdRoute: typeof DashboardReportsReportIdRoute
   DashboardReportsIndexRoute: typeof DashboardReportsIndexRoute
 }
 
 const DashboardReportsRouteChildren: DashboardReportsRouteChildren = {
+  DashboardReportsReportIdRoute: DashboardReportsReportIdRoute,
   DashboardReportsIndexRoute: DashboardReportsIndexRoute,
 }
 
