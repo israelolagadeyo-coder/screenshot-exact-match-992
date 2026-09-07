@@ -135,7 +135,10 @@ export async function collectReportInput(
     status: String(d["status"] ?? "unknown"),
   }));
 
-  const issues = ((datasetRows?.data ?? []) as Record<string, unknown>[]).reduce(
+  const issues = ((datasetRows?.data ?? []) as Record<string, unknown>[]).reduce<{
+    duplicates: number;
+    invalidValues: number;
+  }>(
     (acc, d) => {
       const v = (d["validation"] ?? {}) as Record<string, unknown>;
       return {

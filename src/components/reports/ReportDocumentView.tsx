@@ -104,6 +104,10 @@ function SectionBody({ section, currency }: { section: ReportSection; currency: 
     );
   }
 
+  if (section.type === "findings") {
+    return <FindingList items={section.content.items} icon={Info} />;
+  }
+
   if (section.content.rows.length === 0) {
     return <p className="text-sm text-muted-foreground">No rows are available for this table in the selected period.</p>;
   }
