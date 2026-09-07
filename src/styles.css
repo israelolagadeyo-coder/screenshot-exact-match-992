@@ -194,3 +194,17 @@
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-panel);
 }
+
+@media print {
+  .no-print,
+  aside,
+  header nav {
+    display: none !important;
+  }
+  .report-document {
+    color: #111;
+  }
+  .report-block {
+    break-inside: avoid;
+  }
+}

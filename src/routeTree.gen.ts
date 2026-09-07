@@ -20,8 +20,9 @@ import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardAiRouteImport } from './routes/dashboard/ai'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard/analytics'
 import { Route as DashboardDataRouteImport } from './routes/dashboard/data'
-import { Route as DashboardReportsRouteImport } from './routes/dashboard/reports'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard/settings'
+import { Route as DashboardReportsIndexRouteImport } from './routes/dashboard/reports/index'
+import { Route as DashboardReportsReportIdRouteImport } from './routes/dashboard/reports/$reportId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -78,16 +79,22 @@ const DashboardDataRoute = DashboardDataRouteImport.update({
   path: '/data',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
-const DashboardReportsRoute = DashboardReportsRouteImport.update({
-  id: '/reports',
-  path: '/reports',
-  getParentRoute: () => DashboardRouteRoute,
-} as any)
 const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
+const DashboardReportsIndexRoute = DashboardReportsIndexRouteImport.update({
+  id: '/reports/',
+  path: '/reports/',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardReportsReportIdRoute =
+  DashboardReportsReportIdRouteImport.update({
+    id: '/reports/$reportId',
+    path: '/reports/$reportId',
+    getParentRoute: () => DashboardRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -100,9 +107,10 @@ export interface FileRoutesByFullPath {
   '/dashboard/ai': typeof DashboardAiRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/data': typeof DashboardDataRoute
-  '/dashboard/reports': typeof DashboardReportsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/reports/$reportId': typeof DashboardReportsReportIdRoute
+  '/dashboard/reports/': typeof DashboardReportsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -114,9 +122,10 @@ export interface FileRoutesByTo {
   '/dashboard/ai': typeof DashboardAiRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/data': typeof DashboardDataRoute
-  '/dashboard/reports': typeof DashboardReportsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/reports/$reportId': typeof DashboardReportsReportIdRoute
+  '/dashboard/reports': typeof DashboardReportsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -130,9 +139,10 @@ export interface FileRoutesById {
   '/dashboard/ai': typeof DashboardAiRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/data': typeof DashboardDataRoute
-  '/dashboard/reports': typeof DashboardReportsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/reports/$reportId': typeof DashboardReportsReportIdRoute
+  '/dashboard/reports/': typeof DashboardReportsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -147,9 +157,10 @@ export interface FileRouteTypes {
     | '/dashboard/ai'
     | '/dashboard/analytics'
     | '/dashboard/data'
-    | '/dashboard/reports'
     | '/dashboard/settings'
     | '/dashboard/'
+    | '/dashboard/reports/$reportId'
+    | '/dashboard/reports/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -161,9 +172,10 @@ export interface FileRouteTypes {
     | '/dashboard/ai'
     | '/dashboard/analytics'
     | '/dashboard/data'
-    | '/dashboard/reports'
     | '/dashboard/settings'
     | '/dashboard'
+    | '/dashboard/reports/$reportId'
+    | '/dashboard/reports'
   id:
     | '__root__'
     | '/'
@@ -176,9 +188,10 @@ export interface FileRouteTypes {
     | '/dashboard/ai'
     | '/dashboard/analytics'
     | '/dashboard/data'
-    | '/dashboard/reports'
     | '/dashboard/settings'
     | '/dashboard/'
+    | '/dashboard/reports/$reportId'
+    | '/dashboard/reports/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -270,18 +283,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardDataRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
-    '/dashboard/reports': {
-      id: '/dashboard/reports'
-      path: '/reports'
-      fullPath: '/dashboard/reports'
-      preLoaderRoute: typeof DashboardReportsRouteImport
-      parentRoute: typeof DashboardRouteRoute
-    }
     '/dashboard/settings': {
       id: '/dashboard/settings'
       path: '/settings'
       fullPath: '/dashboard/settings'
       preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/reports/': {
+      id: '/dashboard/reports/'
+      path: '/reports'
+      fullPath: '/dashboard/reports/'
+      preLoaderRoute: typeof DashboardReportsIndexRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/reports/$reportId': {
+      id: '/dashboard/reports/$reportId'
+      path: '/reports/$reportId'
+      fullPath: '/dashboard/reports/$reportId'
+      preLoaderRoute: typeof DashboardReportsReportIdRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
   }
@@ -291,18 +311,20 @@ interface DashboardRouteRouteChildren {
   DashboardAiRoute: typeof DashboardAiRoute
   DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
   DashboardDataRoute: typeof DashboardDataRoute
-  DashboardReportsRoute: typeof DashboardReportsRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardReportsReportIdRoute: typeof DashboardReportsReportIdRoute
+  DashboardReportsIndexRoute: typeof DashboardReportsIndexRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardAiRoute: DashboardAiRoute,
   DashboardAnalyticsRoute: DashboardAnalyticsRoute,
   DashboardDataRoute: DashboardDataRoute,
-  DashboardReportsRoute: DashboardReportsRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
+  DashboardReportsReportIdRoute: DashboardReportsReportIdRoute,
+  DashboardReportsIndexRoute: DashboardReportsIndexRoute,
 }
 
 const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(

@@ -25,4 +25,4 @@
 - [ ] Controlled analytics tools, chat, conversation history, evidence-based answers
 
 ## Phase 5 — reports & hardening
-- [ ] Business performance report, PDF module, performance and security review
+- [x] Report generation wizard, five report types, preview, PDF print and CSV export
