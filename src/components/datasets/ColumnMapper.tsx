@@ -39,17 +39,16 @@ export function ColumnMapper({
   }
 
   const fields = DATASET_SCHEMAS[datasetType];
-  const mappedFields = new Set(Object.values(mapping));
+  // mapping is keyed by standard field -> source column
+  const mappedFields = new Set(Object.keys(mapping));
 
   const handleMap = (sourceColumn: string, fieldKey: string) => {
     const newMapping = { ...mapping };
-    for (const [col, field] of Object.entries(newMapping)) {
-      if (field === fieldKey) delete newMapping[col];
+    for (const [field, col] of Object.entries(newMapping)) {
+      if (col === sourceColumn) delete newMapping[field];
     }
     if (fieldKey !== "__none") {
-      newMapping[sourceColumn] = fieldKey;
-    } else {
-      delete newMapping[sourceColumn];
+      newMapping[fieldKey] = sourceColumn;
     }
     onMappingChange(newMapping);
   };
