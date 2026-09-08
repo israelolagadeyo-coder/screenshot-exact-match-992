@@ -66,7 +66,8 @@ export function suggestMapping(columns: DetectedColumn[], datasetType: DatasetTy
     }
 
     if (bestColumn) {
-      mapping[bestColumn] = field.key;
+      mapping[field.key] = bestColumn;
+      usedColumns.add(bestColumn);
     }
   }
 
