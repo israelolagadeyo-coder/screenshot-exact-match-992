@@ -53,7 +53,7 @@ describe("dataset column mapping", () => {
       ["Cost", "number"],
     ]);
     expect(detectDatasetType(expenses)).toBe("expenses");
-    expect(suggestMapping(expenses, "expenses").amount).toBe("Cost");
+    expect(suggestMapping(expenses, "expenses")['amount']).toBe("Cost");
 
     const customers = cols([
       ["Cust ID", "text"],
@@ -61,6 +61,6 @@ describe("dataset column mapping", () => {
       ["Total Spent", "number"],
     ]);
     expect(detectDatasetType(customers)).toBe("customers");
-    expect(suggestMapping(customers, "customers").purchase).toBe("Total Spent");
+    expect(suggestMapping(customers, "customers")['purchase']).toBe("Total Spent");
   });
 });
