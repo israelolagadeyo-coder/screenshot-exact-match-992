@@ -9,11 +9,12 @@
 - [x] Dashboard shell: sidebar (Overview, Data, Analytics, AI Analyst, Reports, Settings) + Coming Soon items
 - [x] Settings: business details, account profile/password, members list
 
-## Phase 2 — data pipeline
-- [ ] CSV/XLSX upload to private storage bucket `datasets`
-- [ ] Column detection, spreadsheet preview, validation, cleaning
-- [ ] datasets / dataset_columns / transactions / customers / products tables
-- [ ] Dataset health panel
+## Phase 2 — data pipeline (done)
+- [x] CSV/XLSX upload to private storage bucket `datasets` (org-scoped storage policies)
+- [x] Column detection, spreadsheet preview, validation, cleaning
+- [x] datasets / dataset_rows tables with org RLS; rows feed the analytics RPCs
+- [x] Auto dataset-type detection + column mapping (standard field -> source column)
+- [x] Dataset health panel; mapping tests in src/lib/datasets/mapping.test.ts
 
 ## Phase 3 — analytics engine (done)
 - [x] Server-side aggregations: revenue, sales, products, customers, expenses

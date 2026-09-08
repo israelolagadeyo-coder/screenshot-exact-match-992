@@ -30,18 +30,25 @@ function similarity(a: string, b: string): number {
   return 0;
 }
 
+/**
+ * Mapping direction is always: standard field key -> source column name.
+ * The analytics SQL functions read `column_mapping ->> 'revenue'` etc., so this
+ * direction must never be inverted.
+ */
 export function suggestMapping(columns: DetectedColumn[], datasetType: DatasetType): ColumnMapping {
   const mapping: ColumnMapping = {};
   if (datasetType === "unknown") return mapping;
 
   const fields = DATASET_SCHEMAS[datasetType];
+  const usedColumns = new Set<string>();
 
   for (const field of fields) {
     let bestColumn: string | null = null;
     let bestScore = 0;
 
     for (const col of columns) {
-      if (mapping[col.name]) continue;
+      if (usedColumns.has(col.name)) continue;
+
 
       let score = similarity(col.name, field.key);
       for (const alias of field.aliases) {
@@ -59,7 +66,8 @@ export function suggestMapping(columns: DetectedColumn[], datasetType: DatasetTy
     }
 
     if (bestColumn) {
-      mapping[bestColumn] = field.key;
+      mapping[field.key] = bestColumn;
+      usedColumns.add(bestColumn);
     }
   }
 
@@ -105,7 +113,9 @@ export function getUnmappedColumns(
   columns: DetectedColumn[],
   mapping: ColumnMapping,
 ): DetectedColumn[] {
-  return columns.filter((c) => !mapping[c.name]);
+  const mapped = new Set(Object.values(mapping));
+  return columns.filter((c) => !mapped.has(c.name));
+
 }
 
 export function getMappedFields(
@@ -117,7 +127,7 @@ export function getMappedFields(
   const result: { field: StandardField; sourceColumn: string }[] = [];
 
   for (const field of fields) {
-    const sourceCol = Object.entries(mapping).find(([, v]) => v === field.key)?.[0];
+    const sourceCol = mapping[field.key];
     if (sourceCol) {
       result.push({ field, sourceColumn: sourceCol });
     }
