@@ -113,7 +113,9 @@ export function getUnmappedColumns(
   columns: DetectedColumn[],
   mapping: ColumnMapping,
 ): DetectedColumn[] {
-  return columns.filter((c) => !mapping[c.name]);
+  const mapped = new Set(Object.values(mapping));
+  return columns.filter((c) => !mapped.has(c.name));
+
 }
 
 export function getMappedFields(
