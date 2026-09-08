@@ -70,7 +70,7 @@ export function ColumnMapper({
 
       <div className="mt-5 space-y-3">
         {columns.map((col) => {
-          const mappedField = mapping[col.name];
+          const mappedField = Object.entries(mapping).find(([, c]) => c === col.name)?.[0];
           const isMapped = Boolean(mappedField);
 
           return (
