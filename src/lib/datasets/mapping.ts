@@ -127,7 +127,7 @@ export function getMappedFields(
   const result: { field: StandardField; sourceColumn: string }[] = [];
 
   for (const field of fields) {
-    const sourceCol = Object.entries(mapping).find(([, v]) => v === field.key)?.[0];
+    const sourceCol = mapping[field.key];
     if (sourceCol) {
       result.push({ field, sourceColumn: sourceCol });
     }
