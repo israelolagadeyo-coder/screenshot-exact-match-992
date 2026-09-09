@@ -5,7 +5,7 @@
 //     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
-import { loadEnv, type Plugin } from "vite";
+import type { Plugin } from "vite";
 
 // Rewrite import.meta.env['VITE_X'] / ["VITE_X"] to dot access so Vite's
 // env replacement applies in the browser bundle.
