@@ -5,8 +5,27 @@
 //     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { loadEnv, type Plugin } from "vite";
+
+function bracketNotationEnvPlugin(): Plugin {
+  return {
+    name: "bizintel-bracket-notation-env",
+    config(_config, { mode }) {
+      const env = loadEnv(mode, process.cwd(), "VITE_");
+      return {
+        define: Object.fromEntries(
+          Object.entries(env).map(([key, value]) => [
+            `import.meta.env['${key}']`,
+            JSON.stringify(value),
+          ]),
+        ),
+      };
+    },
+  };
+}
 
 export default defineConfig({
+  plugins: [bracketNotationEnvPlugin()],
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
